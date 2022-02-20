@@ -1,0 +1,193 @@
+Project Number: ARA-1
+Project Type: Education
+Project Name: Kabul_Library
+Project Duration: 0
+Project Start Date: 0
+Project End Date: 0
+Project Dev Name: Alireza Mohsini
+---------------------------------------------------------------------------------------------------------
+<---*** Some Rolls ***--->
+1- Every One can join to library.
+2- Total Payment for Registration is 500AFN.
+3- If some Can't pay this must to pay in 2month.
+3- Every one can loan book if they have registered yet.
+4- Total day to return book is 20 day
+5- If loan book return days become more then 20days, someone how loan it should sconce 50AFN/week
+6- If loan book didn't return back to library after 3month and thoes custumers that the have loaned the book should registerd agmain and user account must be removed temprary
+7-  
+<---*** Some Rolls ***--->
+
+<---------***    Some Symbols Use in this project TXT file Befor Diagram ER  ***-------->
+
+* Entity
+> Weak Entity
+>> Relationship
+- Attribute 
+
+<---------******--------> 
+Step One: Main Entity
+
+* book
+* autor
+* customer
+* loan
+* country
+* city
+
+-----------------------------------------------------------------------------------------
+Step Two: Set Attributes
+
+* book
+	- bk_id 
+	- bk_isbn
+	- bk_title
+	- bk_about
+	- bk_content
+	- bk_publisher
+	- bk_pub_date
+	- bk_author
+	- bk_img 
+	- bk_transilator
+	- bk_lang
+	- bk_edition
+	- bk_volume
+	- bk_price
+	- bk_wrapper
+* autor
+	- aut_id
+	- aut_name
+	- aut_lname
+	- aut_dob
+	- aut_country
+* customer
+	- cust_id
+	- cust_name
+	- cust_lname
+	- cust_country
+	- cust_city
+	- cust_phone
+	- cust_email
+	- cust_web
+	- cust_emrg_phone
+	- cust_job
+* loan
+	- loan_id
+	- loan_by
+	- loan_date
+	- loan_book
+* country
+	- country_id
+	- country_name
+* city
+	- city_id
+	- city_name
+	- city_relate_to
+-------------------------------------------------------------------------------
+Step three: (1NF) Normalization
+
+* book
+	- bk_isbn
+	- bk_title
+	- bk_author 
+	- bk_lang
+	- bk_edition
+	- bk_volume
+	- bk_wrapper
+	- bk_price
+* book_detail
+	- bk_isbn
+	- bk_content
+	- bk_publisher
+	- bk_pub_date
+	- bk_img 
+	- bk_transilator
+* autor
+	- aut_id
+	- aut_name
+	- aut_lname
+	- aut_dob
+	- aut_country
+* customer
+	- cust_id
+	- cust_name
+	- cust_lname
+* customer_detail
+	- cust_id
+	- cust_country
+	- cust_city
+	- cust_phone
+	- cust_email
+	- cust_web
+	- cust_emrg_phone
+	- cust_job
+* loan
+	- loan_id
+	- loan_by
+	- loan_date
+	- loan_book
+* country
+	- country_id
+	- country_name
+* city
+	- city_id
+	- city_name
+	- city_relate_to
+
+----------------------------------------------------------------------
+Step Four: (2NF) Normalization
+
+* book
+	- bk_isbn 		VARCHAR()	PRIMARY KEY	UNIQUE	INDEX			NOT NULL
+	- bk_name		VARCHAR()				INDEX	   		NOT NULL
+	- bk_author 		INT() 		FOREIGN KEY			   		NOT NULL
+	- bk_lang		CHAR(32)					   		NOT NULL
+	- bk_edition		INT(11)					 			NOT NULL	DEFAULT 1 
+	- bk_volume		INT()						   		NOT NULL	DEFAULT 0
+	- bk_wrapper		INT(11) 					   		NULL
+	- bk_price		FLOAT()						   		NOT NULL	DEFAULT 0.00
+* book_detail
+	- bk_isbn		VARCHAR()	FOREIGN KEY 	UNIQUE 	 	   		NOT NULL
+	- bk_content		VARCHAR()					   		NULL
+	- bk_publisher		CHAR()					   			NOT NULL
+	- bk_pub_date		DATE()						   		NULL
+	- bk_img 		VARCHAR() 					   		NOT NULL
+	- bk_transilator	CHAR() 					   			NULL
+* autor
+	- aut_id		INT()		PRIMARY KEY 	UNIQUE		AUTOINCREMENT	NOT NULL			 
+	- aut_name		VARCHAR()							NOT NULL
+	- aut_lname		VARCHAR() 	PRIMARY KEY 					NOT NULL
+	- aut_dob		YEAR()								NOT NULL
+	- aut_country		INT()		FOREIGN KEY 	UNIQUE				NOT NULL
+* customer
+	- cust_id		INT()		PRIMARY KEY 	UNIQUE 	INDEX			NOT NULL
+	- cust_name		varchar()							NOT NULL
+	- cust_lname		VARCHAR() 							NOT NULL
+	- cust_dtl		INT()		FOREIGN KEY 	UNIQUE				NOT NULL
+* customer_detail
+	- cust_id		INT()		PRIMARY KEY 	UNIQUE		AUTOINCREMENT 	NOT NULL
+	- cust_country		INT() 		FOREIGN KEY 	UNIQUE				NOT NULL
+	- cust_city		INT() 		FOREIGN KEY 	UNIQUE 				NOT NULL
+	- cust_phone		VARCHAR() 			UNIQUE				NOT NULL
+	- cust_email		VARCHAR()			UNIQUE				NOT NULL
+	- cust_web		VARCHAR() 							NULL
+	- cust_emrg_phone	VARCHAR() 			UNIQUE				NOT NULL
+	- cust_job		VARCHAR()							NULL
+	- cust_extant		FLOAT()								NULL		DEFAULT 0.00		
+* loan
+	- loan_id		INT() 		PRIMARY KEY	UNIQUE				NOT NULL
+	- loan_by		INT()		FOREIGN KEY 	UNIQUE				NOT NULL
+	- loan_date		DATE()								NOT NULL	
+	- loan_book		VARCHAR()	FOREIGN KEY 	UNIQUE				NOT NULL
+* city
+	- city_id		INT() 		PRIMARY KEY 	UNIQUE 		AUTOINCREMENT	NOT NULL
+	- city_name		CHAR()					INDEX			NOT NULL
+	- city_country_code	CHAR() 		FOREIGN KEY 	UNIQUE				NOT NULL
+* country
+	- country_code		INT()		PRIMARY KEY 	UNIQUE		AUTOINCREMENT	NOT NULL
+	- country_name		CHAR()				UNIQUE	INDEX			NOT NULL
+	- country_lang		CHAR()								NOT NULL	
+
+
+
+
+
